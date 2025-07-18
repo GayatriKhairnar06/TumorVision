@@ -1,7 +1,13 @@
-streamlit
+streamlit==1.27.2
 tensorflow==2.13.0
 keras
 numpy
 pillow
 matplotlib
 scikit-learn
+pandas
+seaborn
+sklearn.metrics
+shutil
+localtunnel
+pyngrok
