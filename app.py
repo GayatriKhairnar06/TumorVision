@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 # --- Configuration (MUST MATCH YOUR TRAINING CONFIG) ---
-MODEL_PATH = '/content/saved_models/mobilenet_v2_best.h5' # <--- IMPORTANT: Update this
+MODEL_PATH = '/content/saved_models/mobilenet_v2_best.keras' # <--- IMPORTANT: Update this
 IMG_HEIGHT = 224
 IMG_WIDTH = 224
 CLASS_NAMES = ['glioma', 'meningioma', 'no_tumor', 'pituitary'] # <--- CONFIRM THIS ORDER
