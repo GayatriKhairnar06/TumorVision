@@ -36,41 +36,37 @@ def predict_tumor_type(model, img_array, class_names):
     confidence = predictions[0][predicted_class_idx] * 100
     return predicted_class_name, confidence, predictions[0]
 
-# --- Streamlit UI Styling ---
+# --- Page Setup ---
 st.set_page_config(page_title="Brain Tumor Classifier", page_icon="🧠", layout="centered")
 
-# Custom CSS
+# --- Custom CSS ---
 st.markdown("""
     <style>
-        .main { background-color: #f8f5fc; }
+        .main { background-color: #fefcfe; }
         .block-container { padding-top: 2rem; }
-        h1 { color: #6a1b9a; text-align: center; font-size: 40px; }
-        h4, p { color: #444; }
+        h1 { color: #4a148c; text-align: center; font-size: 40px; }
         .uploadbox {
             background-color: #f3e5f5;
-            padding: 30px;
+            padding: 20px;
             border-radius: 12px;
             border: 2px dashed #ba68c8;
             text-align: center;
-            margin-bottom: 20px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar
-st.sidebar.markdown("### 👩‍💻 About")
-st.sidebar.markdown("**Gayatri Khairnar**  \n`AI Developer & Data Scientist`")
-st.sidebar.markdown("📩 `khairnargayatri333@gmail.com`")
-st.sidebar.markdown("> *Decoding the Universe, One Dataset at a Time*")
-
-# Title and Description
+# --- Title and Description ---
 st.markdown("<h1>🧠 Brain Tumor MRI Image Classifier</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Upload a brain MRI image to receive an AI-powered classification of tumor type.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 16px;'>Upload a brain MRI image to receive an AI-powered classification of tumor type.</p>", unsafe_allow_html=True)
 
+# --- Load Model ---
 model = load_model()
 
 if model:
-    st.markdown("<div class='uploadbox'>📤 <strong>Upload MRI Image</strong> (JPG, JPEG, PNG)</div>", unsafe_allow_html=True)
+    st.markdown("<div class='uploadbox'>📤 Upload MRI Image <small>(JPG, JPEG, PNG)</small></div>", unsafe_allow_html=True)
     uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
@@ -85,7 +81,7 @@ if model:
             img_array = preprocess_image(temp_file_path)
             predicted_class, confidence, all_predictions = predict_tumor_type(model, img_array, CLASS_NAMES)
 
-            # Result Display
+            # Result Card
             st.markdown(f"""
                 <div style="background-color:#e1bee7; padding:20px; border-radius:10px; text-align:center">
                     <h2 style="color:#4a148c;">Prediction: {predicted_class.replace('_', ' ').title()}</h2>
@@ -105,7 +101,7 @@ if model:
 else:
     st.warning("🚫 Model could not be loaded. Check the model path and file.")
 
-# Footer
+# --- Footer ---
 st.markdown("""
     <hr>
     <div style='text-align: center; font-size: 13px; color: #aaa;'>
