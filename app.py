@@ -79,5 +79,18 @@ if model:
         except Exception as e:
             st.error(f"Error during prediction: {e}")
             st.warning("Please ensure the uploaded file is a valid image (JPG, JPEG, PNG).")
+elif app_mode == "About":
+    st.header("Welcome to TumorVision: Your Brain Tumor Detection Solution")
+    st.markdown("""
+    TumorVision is an advanced online platform designed to provide swift and accurate detection of brain tumors through the simple upload of MRI images. Our innovative technology harnesses the power of artificial intelligence and machine learning algorithms to analyze MRI scans with exceptional precision, enabling early detection and prompt intervention.
+    
+    With just a few clicks, users can securely upload their MRI images to our platform. Our sophisticated algorithms then meticulously scrutinize these images, identifying subtle anomalies and patterns indicative of brain tumors. Within moments, users receive comprehensive reports outlining the presence or absence of tumors, along with detailed insights into the findings.
+    
+    At TumorVision, we prioritize user experience, ensuring a seamless journey from image upload to result delivery. Our intuitive interface is user-friendly, making it accessible to both healthcare professionals and individuals seeking peace of mind about their neurological health.
+    
+    Early detection is key in the effective management of brain tumors, and TumorVision empowers individuals and healthcare providers alike to take proactive steps towards timely diagnosis and treatment. Our commitment to cutting-edge technology and unwavering accuracy sets us apart as a trusted ally in the fight against brain tumors.
+    
+    Join us in the mission to revolutionize brain tumor detection and transform outcomes for patients worldwide. Experience the power of TumorVision today.""")
+    
 else:
     st.warning("Model could not be loaded. Please ensure `MODEL_PATH` is correct and the model file exists.")
