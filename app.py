@@ -71,34 +71,19 @@ st.title("🧠 Brain Tumor MRI Image Classifier")
 st.markdown("Upload a brain MRI image to get an AI-powered tumor classification.")
 
 model = load_model()
+TUMOR_INFO = {
+    "glioma": "🧠 **Glioma** tumors originate in the glial cells. They can be benign or malignant and often require surgery or therapy.",
+    "meningioma": "🧠 **Meningioma** tumors arise from the brain’s protective layers (meninges). Most are benign but can press on brain tissue.",
+    "no_tumor": "✅ **No Tumor Detected**. This MRI appears normal, but medical consultation is always recommended.",
+    "pituitary": "🧠 **Pituitary Tumor** occurs in the pituitary gland, which controls hormones. Most are benign but may affect body functions."
+}
 
 if model:
     uploaded_file = st.file_uploader(
         "Choose an MRI image...",
         type=["jpg", "jpeg", "png"]
     )
-    st.markdown("---")
-    st.subheader("🧠 Tumor Types Information")
-
-    st.markdown("""
-    #### 1. **Glioma Tumor**
-    - Originates in glial cells.
-    - Often malignant and aggressive.
-    - Symptoms: Seizures, headaches, personality changes.
-
-    #### 2. **Meningioma Tumor**
-    - Develops in the meninges (protective brain lining).
-    - Mostly benign but can grow large.
-    - Symptoms: Headaches, vision issues, coordination problems.
-
-    #### 3. **Pituitary Tumor**
-    - Found in the pituitary gland (controls hormones).
-    - Usually benign.
-    - Symptoms: Hormonal imbalances, fatigue, vision changes.
-
-    #### 4. **No Tumor**
-    - MRI shows normal brain tissue.
-    """)
+    
 
     if uploaded_file is not None:
         st.image(uploaded_file, caption='Uploaded MRI Image', use_container_width=True)
@@ -115,6 +100,9 @@ if model:
 
             st.success(f"Prediction: **{predicted_class.replace('_', ' ').title()}**")
             st.info(f"Confidence: **{confidence:.2f}%**")
+            # Display additional information about the predicted class
+            st.subheader("ℹ️ Tumor Information")
+            st.markdown(TUMOR_INFO.get(predicted_class, "No additional information available."))
 
             st.subheader("All Class Probabilities:")
             for i, (class_name, prob) in enumerate(zip(CLASS_NAMES, all_predictions)):
