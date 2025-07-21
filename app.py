@@ -46,6 +46,17 @@ st.set_page_config(
 st.title("🧠 Brain Tumor MRI Image Classifier")
 st.markdown("Upload a brain MRI image to get an AI-powered tumor classification.")
 
+# --- Visible Tumor Info ---
+st.markdown("""
+### 🔍 Tumor Type Overview:
+- **Glioma**: Tumors originating from glial cells in the brain or spine.
+- **Meningioma**: Tumors developing from the meninges (the membranes that surround the brain and spinal cord).
+- **Pituitary Tumor**: Abnormal growths in the pituitary gland, affecting hormonal balance.
+- **No Tumor**: No tumor detected in the scan.
+
+> 🔬 **Disclaimer**: This tool is for educational purposes only and is not intended for medical diagnosis.
+""")
+
 model = load_model()
 
 if model:
@@ -64,30 +75,4 @@ if model:
                 f.write(uploaded_file.getbuffer())
 
             img_array = preprocess_image(temp_file_path)
-            predicted_class, confidence, all_predictions = predict_tumor_type(model, img_array, CLASS_NAMES)
-
-            st.success(f"Prediction: **{predicted_class.replace('_', ' ').title()}**")
-            st.info(f"Confidence: **{confidence:.2f}%**")
-
-            st.subheader("All Class Probabilities:")
-            for class_name, prob in zip(CLASS_NAMES, all_predictions):
-                st.write(f"- {class_name.replace('_', ' ').title()}: **{prob * 100:.2f}%**")
-
-            os.remove(temp_file_path)
-
-        except Exception as e:
-            st.error(f"Error during prediction: {e}")
-            st.warning("Please ensure the uploaded file is a valid image (JPG, JPEG, PNG).")
-
-    with st.expander("💡 Tumor Type Overview"):
-        st.markdown("""
-        - **Glioma**: Tumors originating from glial cells in the brain or spine.
-        - **Meningioma**: Tumors developing from the meninges (the membranes that surround the brain and spinal cord).
-        - **Pituitary Tumor**: Abnormal growths in the pituitary gland, affecting hormonal balance.
-        - **No Tumor**: No tumor detected in the scan.
-
-        > 🔬 **Disclaimer**: This tool is for educational purposes only and is not intended for medical diagnosis.
-        """)
-
-else:
-    st.warning("Model could not be loaded. Please ensure `MODEL_PATH` is correct and the model file exists.")
+            predicted_class, confidence, all_predictions = pr
