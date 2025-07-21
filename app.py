@@ -54,27 +54,27 @@ if model:
         type=["jpg", "jpeg", "png"]
     )
     st.markdown("---")
-st.subheader("🧠 Tumor Types Information")
+    st.subheader("🧠 Tumor Types Information")
 
-st.markdown("""
-#### 1. **Glioma Tumor**
-- Originates in glial cells.
-- Often malignant and aggressive.
-- Symptoms: Seizures, headaches, personality changes.
+    st.markdown("""
+    #### 1. **Glioma Tumor**
+    - Originates in glial cells.
+    - Often malignant and aggressive.
+    - Symptoms: Seizures, headaches, personality changes.
 
-#### 2. **Meningioma Tumor**
-- Develops in the meninges (protective brain lining).
-- Mostly benign but can grow large.
-- Symptoms: Headaches, vision issues, coordination problems.
+    #### 2. **Meningioma Tumor**
+    - Develops in the meninges (protective brain lining).
+    - Mostly benign but can grow large.
+    - Symptoms: Headaches, vision issues, coordination problems.
 
-#### 3. **Pituitary Tumor**
-- Found in the pituitary gland (controls hormones).
-- Usually benign.
-- Symptoms: Hormonal imbalances, fatigue, vision changes.
+    #### 3. **Pituitary Tumor**
+    - Found in the pituitary gland (controls hormones).
+    - Usually benign.
+    - Symptoms: Hormonal imbalances, fatigue, vision changes.
 
-#### 4. **No Tumor**
-- MRI shows normal brain tissue.
-""")
+    #### 4. **No Tumor**
+    - MRI shows normal brain tissue.
+    """)
 
     if uploaded_file is not None:
         st.image(uploaded_file, caption='Uploaded MRI Image', use_container_width=True)
