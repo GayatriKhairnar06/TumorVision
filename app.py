@@ -42,6 +42,30 @@ st.set_page_config(
     page_icon="🧠",
     layout="centered"
 )
+# 💅 Custom Background Theme
+st.markdown("""
+<style>
+/* Main background */
+[data-testid="stAppViewContainer"] {
+    background-color: #ffe6f0;
+}
+
+/* Sidebar background */
+[data-testid="stSidebar"] {
+    background-color: #ffccdf;
+}
+
+/* Header (make transparent or you can set a solid color) */
+[data-testid="stHeader"] {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* Text adjustments (optional) */
+h1, h2, h3, h4, h5 {
+    color: #800040;
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.title("🧠 Brain Tumor MRI Image Classifier")
 st.markdown("Upload a brain MRI image to get an AI-powered tumor classification.")
