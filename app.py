@@ -75,4 +75,12 @@ if model:
                 f.write(uploaded_file.getbuffer())
 
             img_array = preprocess_image(temp_file_path)
-            predicted_class, confidence, all_predictions = pr
+predicted_class, confidence, all_predictions = predict_tumor_type(model, img_array, CLASS_NAMES)
+
+st.success(f"Prediction: **{predicted_class.replace('_', ' ').title()}**")
+st.info(f"Confidence: **{confidence:.2f}%**")
+
+st.subheader("All Class Probabilities:")
+for class_name, prob in zip(CLASS_NAMES, all_predictions):
+    st.write(f"- {class_name.replace('_', ' ').title()}: **{prob * 100:.2f}%**")
+
