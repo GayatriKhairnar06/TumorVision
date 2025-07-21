@@ -45,7 +45,32 @@ st.set_page_config(
 
 st.title("🧠 Brain Tumor MRI Image Classifier")
 st.markdown("Upload a brain MRI image to get an AI-powered tumor classification.")
+# --- Additional Info Sections ---
+with st.expander("🧠 About the App"):
+    st.markdown("""
+    This AI-powered application classifies brain tumor MRI images into one of four categories:
+    **Glioma**, **Meningioma**, **Pituitary Tumor**, or **No Tumor**.  
+    The model is built on **MobileNetV2**, optimized for medical image classification.  
+    It assists in early tumor detection by providing fast, reliable insights.
+    """)
 
+with st.expander("⚙️ How It Works"):
+    st.markdown("""
+    1. Upload a brain **MRI image** (JPG, JPEG, or PNG).
+    2. Image is resized to `224x224` and normalized.
+    3. A pre-trained deep learning model predicts the tumor category.
+    4. You'll see:
+       - 🧠 Predicted tumor type
+       - 📈 Confidence percentage
+       - 📊 Probabilities of all four classes
+    """)
+
+with st.expander("💡 Tumor Type Overview"):
+    st.markdown("""
+    - **Glioma**: Tumors from glial cells that support nerve cells in the brain.
+    - **Meningioma**: Tumors from the meninges, typically benign but space-occupying.
+    - **Pituitary Tumor**: Affects the pituitary gland; may disrupt hormone levels.
+    - **No Tumor**: The model detected no tumor in the image.
 model = load_model()
 
 if model:
