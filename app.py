@@ -43,17 +43,24 @@ st.set_page_config(page_title="Brain Tumor Classifier", page_icon="🧠", layout
 st.markdown("""
     <style>
         .stApp {
-            background-image: url("https://www.linkpicture.com/q/brain-bg.jpg");
+            background-image: url("https://images.unsplash.com/photo-1588776814546-b1b06dc3d7d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80");
             background-size: cover;
-            background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        .main { background-color: rgba(255, 255, 255, 0.85); border-radius: 12px; padding: 2rem; }
-        .block-container { padding-top: 2rem; }
-        h1 { color: #4a148c; text-align: center; font-size: 40px; }
+        .main {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4a148c;
+            text-align: center;
+            font-size: 40px;
+        }
         .uploadbox {
-            background-color: rgba(243, 229, 245, 0.9);
+            background-color: #f3e5f5;
             padding: 20px;
             border-radius: 12px;
             border: 2px dashed #ba68c8;
@@ -64,6 +71,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 # --- Title and Description ---
