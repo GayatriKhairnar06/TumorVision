@@ -4,11 +4,11 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
 
-# --- Configuration (MUST MATCH YOUR TRAINING CONFIG) ---
-MODEL_PATH = './mobilenet_v2_best.keras' # <--- IMPORTANT: Update this
+# --- Configuration ---
+MODEL_PATH = './mobilenet_v2_best.keras'
 IMG_HEIGHT = 224
 IMG_WIDTH = 224
-CLASS_NAMES = ['glioma', 'meningioma', 'no_tumor', 'pituitary'] # <--- CONFIRM THIS ORDER
+CLASS_NAMES = ['glioma', 'meningioma', 'no_tumor', 'pituitary']
 
 @st.cache_resource
 def load_model():
@@ -45,32 +45,7 @@ st.set_page_config(
 
 st.title("🧠 Brain Tumor MRI Image Classifier")
 st.markdown("Upload a brain MRI image to get an AI-powered tumor classification.")
-# --- Additional Info Sections ---
-with st.expander("🧠 About the App"):
-    st.markdown("""
-    This AI-powered application classifies brain tumor MRI images into one of four categories:
-    **Glioma**, **Meningioma**, **Pituitary Tumor**, or **No Tumor**.  
-    The model is built on **MobileNetV2**, optimized for medical image classification.  
-    It assists in early tumor detection by providing fast, reliable insights.
-    """)
 
-with st.expander("⚙️ How It Works"):
-    st.markdown("""
-    1. Upload a brain **MRI image** (JPG, JPEG, or PNG).
-    2. Image is resized to `224x224` and normalized.
-    3. A pre-trained deep learning model predicts the tumor category.
-    4. You'll see:
-       - 🧠 Predicted tumor type
-       - 📈 Confidence percentage
-       - 📊 Probabilities of all four classes
-    """)
-
-with st.expander("💡 Tumor Type Overview"):
-    st.markdown("""
-    - **Glioma**: Tumors from glial cells that support nerve cells in the brain.
-    - **Meningioma**: Tumors from the meninges, typically benign but space-occupying.
-    - **Pituitary Tumor**: Affects the pituitary gland; may disrupt hormone levels.
-    - **No Tumor**: The model detected no tumor in the image.
 model = load_model()
 
 if model:
@@ -81,7 +56,6 @@ if model:
 
     if uploaded_file is not None:
         st.image(uploaded_file, caption='Uploaded MRI Image', use_container_width=True)
-        st.write("")
         st.write("Classifying...")
 
         try:
@@ -96,13 +70,24 @@ if model:
             st.info(f"Confidence: **{confidence:.2f}%**")
 
             st.subheader("All Class Probabilities:")
-            for i, (class_name, prob) in enumerate(zip(CLASS_NAMES, all_predictions)):
-                st.write(f"- {class_name.replace('_', ' ').title()}: **{prob*100:.2f}%**")
+            for class_name, prob in zip(CLASS_NAMES, all_predictions):
+                st.write(f"- {class_name.replace('_', ' ').title()}: **{prob * 100:.2f}%**")
 
             os.remove(temp_file_path)
 
         except Exception as e:
             st.error(f"Error during prediction: {e}")
             st.warning("Please ensure the uploaded file is a valid image (JPG, JPEG, PNG).")
+
+    with st.expander("💡 Tumor Type Overview"):
+        st.markdown("""
+        - **Glioma**: Tumors originating from glial cells in the brain or spine.
+        - **Meningioma**: Tumors developing from the meninges (the membranes that surround the brain and spinal cord).
+        - **Pituitary Tumor**: Abnormal growths in the pituitary gland, affecting hormonal balance.
+        - **No Tumor**: No tumor detected in the scan.
+
+        > 🔬 **Disclaimer**: This tool is for educational purposes only and is not intended for medical diagnosis.
+        """)
+
 else:
     st.warning("Model could not be loaded. Please ensure `MODEL_PATH` is correct and the model file exists.")
