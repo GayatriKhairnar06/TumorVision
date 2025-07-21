@@ -39,14 +39,21 @@ def predict_tumor_type(model, img_array, class_names):
 # --- Page Setup ---
 st.set_page_config(page_title="Brain Tumor Classifier", page_icon="🧠", layout="centered")
 
-# --- Custom CSS ---
+# --- Custom CSS with Background Image ---
 st.markdown("""
     <style>
-        .main { background-color: #fefcfe; }
+        .stApp {
+            background-image: url("https://www.linkpicture.com/q/brain-bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .main { background-color: rgba(255, 255, 255, 0.85); border-radius: 12px; padding: 2rem; }
         .block-container { padding-top: 2rem; }
         h1 { color: #4a148c; text-align: center; font-size: 40px; }
         .uploadbox {
-            background-color: #f3e5f5;
+            background-color: rgba(243, 229, 245, 0.9);
             padding: 20px;
             border-radius: 12px;
             border: 2px dashed #ba68c8;
@@ -57,6 +64,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 # --- Title and Description ---
 st.markdown("<h1>🧠 Brain Tumor MRI Image Classifier</h1>", unsafe_allow_html=True)
